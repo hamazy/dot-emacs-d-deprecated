@@ -49,3 +49,13 @@
   (setq twittering-use-master-password nil))
 (add-hook 'after-init-hook
 	  'my-twittering-mode-init)
+
+;; auto-complete
+(my-package-install 'auto-complete)
+(defun my-auto-complete-init ()
+  (require 'auto-complete)
+  (add-to-list 'ac-dictionary-directories "~/.emacs.d/dict")
+  (require 'auto-complete-config)
+  (ac-config-default))
+(add-hook 'after-init-hook
+	  'my-auto-complete-init)
