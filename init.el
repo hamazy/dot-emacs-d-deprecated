@@ -16,12 +16,13 @@
                            ("marmalade" . "http://marmalade-repo.org/packages/")
                            ("melpa" . "http://melpa.milkbox.net/packages/")))
 (package-list-packages t)
+(defun my-package-install (name) 
+  (when (not (package-installed-p name))
+    (package-install name)))
 
 ;; anything, anything-config
-(when (not (package-installed-p 'anything))
-  (package-install 'anything))
-(when (not (package-installed-p 'anything-config))
-  (package-install 'anything-config))
+(my-package-install 'anything)
+(my-package-install 'anything-config)
 (defun my-anything ()
   (interactive)
   (anything-other-buffer
@@ -39,3 +40,12 @@
    "\C-x;" 'my-anything))
 (add-hook 'after-init-hook
 	  'my-anything-init)
+
+;; twittering-mode
+(my-package-install 'twittering-mode)
+(defun my-twittering-mode-init ()
+  (require 'twittering-mode)
+  (setq twittering-icon-mode nil)
+  (setq twittering-use-master-password nil))
+(add-hook 'after-init-hook
+	  'my-twittering-mode-init)
