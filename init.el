@@ -76,3 +76,20 @@
 (autoload 'mew "mew" nil t)
 (autoload 'mew-send "mew" nil t)
 (setq mew-ssl-verify-level 0)
+
+;; font settings
+(defun font-exists-p (font)
+  (member font (font-family-list)))
+(when (font-exists-p "Hiragino Maru Gothic Pro")
+  (set-fontset-font
+   (frame-parameter nil 'font)
+   'japanese-jisx0208
+   '("Hiragino Maru Gothic Pro" . "iso10646-1"))
+  (set-fontset-font
+   (frame-parameter nil 'font)
+   'katakana-jisx0201
+   '("Hiragino Maru Gothic Pro" . "iso10646-1"))
+  (set-fontset-font
+   (frame-parameter nil 'font)
+   'japanese-jisx0212
+   '("Hiragino Maru Gothic Pro" . "iso10646-1")))
