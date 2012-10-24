@@ -61,3 +61,8 @@
   (ac-config-default))
 (add-hook 'after-init-hook
 	  'my-auto-complete-init)
+
+;; w3m
+(my-package-install 'w3m)
+(defun my-w3m-init ()
+  (require 'w3m))
