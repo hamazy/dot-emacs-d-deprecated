@@ -62,6 +62,11 @@
 (add-hook 'after-init-hook
 	  'my-auto-complete-init)
 
+;; w3m package needs w3m command to be in the exec-path.
+(let ((opt-local-bin "/opt/local/bin"))
+  (when (file-accessible-directory-p opt-local-bin)
+    (setq exec-path (append (list opt-local-bin) exec-path))))
+
 ;; w3m
 (my-package-install 'w3m)
 (defun my-w3m-init ()
