@@ -80,6 +80,10 @@
 ;; font settings
 (defun font-exists-p (font)
   (member font (font-family-list)))
+(when (font-exists-p "Monaco")
+  (set-face-attribute 'default nil
+		      :family "Monaco"
+		      :height 100))
 (when (font-exists-p "Hiragino Maru Gothic Pro")
   (set-fontset-font
    (frame-parameter nil 'font)
