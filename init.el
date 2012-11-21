@@ -63,9 +63,13 @@
 	  'my-auto-complete-init)
 
 ;; w3m package needs w3m command to be in the exec-path.
-(let ((opt-local-bin "/opt/local/bin"))
-  (when (file-accessible-directory-p opt-local-bin)
-    (setq exec-path (append (list opt-local-bin) exec-path))))
+(defun my-add-to-path (dir)
+  (let ((sep (if (eq system-type 'windows-nt) ";" ":")))
+    (when (file-accessible-directory-p dir)
+      (setq exec-path (append (list dir) exec-path))
+      (let ((path-env-key "PATH"))
+	(setenv path-env-key (concat dir sep (getenv path-env-key)))))))
+(my-add-to-path "/opt/local/bin")
 
 ;; w3m
 (my-package-install 'w3m)
