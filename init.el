@@ -101,3 +101,5 @@
    (frame-parameter nil 'font)
    'japanese-jisx0212
    '("Hiragino Maru Gothic Pro" . "iso10646-1")))
+
+(setq tramp-default-method "ssh")
