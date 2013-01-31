@@ -75,6 +75,37 @@
 (my-package-install 'w3m)
 (defun my-w3m-init ()
   (require 'w3m))
+(add-hook 'after-init-hook
+	  'my-w3m-init)
+
+;; scala
+(my-package-install 'scala-mode)
+(defun my-ensime-show-tooltips-nox ()
+  (interactive)
+  (ensime-tooltip-handler (point)))
+(defun my-scala-init ()
+  (require 'scala-mode-auto)
+  (add-to-list 'load-path "/opt/local/ensime_2.9.2-0.9.8.1/elisp")
+  (require 'ensime)
+  (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+  (define-key ensime-mode-map "\C-c\C-v." 'my-ensime-show-tooltips-nox))
+(add-hook 'after-init-hook
+	  'my-scala-init)
+
+;; gtags
+(my-package-install 'gtags)
+(defun my-gtags-init ()
+  (autoload 'gtags-mode "gtags" "" t)
+  (add-hook 'c++-mode-hook
+	  '(lambda ()
+	     (gtags-mode t)))
+  (add-hook 'c-mode-hook
+	  '(lambda ()
+	     (gtags-mode t))))
+(add-hook 'after-init-hook
+	  'my-gtags-init)
+
+(my-package-install 'coffee-mode)
 
 ;; mew
 (autoload 'mew "mew" nil t)
@@ -103,3 +134,17 @@
    '("Hiragino Maru Gothic Pro" . "iso10646-1")))
 
 (setq tramp-default-method "ssh")
+
+(defun silver (pdelta)
+  (let* ((m-delta (* pdelta 10))
+	(fee (* m-delta 0.5))
+	(fee1 (ftruncate (* fee 0.1)))
+	(fee2 (ftruncate (* fee 0.05)))
+	(sum (+ fee1 fee2))
+	(tax (ftruncate (* sum 0.05)))
+	(charge (+ sum tax)))
+    (list fee1 fee2 sum tax charge)))
+
+;; set to the preferred frame size that fit to an 11 inch display
+(if window-system
+    (set-frame-size (selected-frame) 223 56))
