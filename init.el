@@ -89,8 +89,8 @@
   (require 'ensime)
   (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
   (define-key ensime-mode-map "\C-c\C-v." 'my-ensime-show-tooltips-nox))
-(add-hook 'after-init-hook
-	  'my-scala-init)
+;; (add-hook 'after-init-hook
+;; 	  'my-scala-init)
 
 ;; gtags
 (my-package-install 'gtags)
@@ -106,6 +106,9 @@
 	  'my-gtags-init)
 
 (my-package-install 'coffee-mode)
+(defun my-coffee-init()
+  (setq coffee-tab-width 2) )
+(add-hook 'after-init-hook 'my-coffee-init)
 
 ;; mew
 (autoload 'mew "mew" nil t)
@@ -147,4 +150,4 @@
 
 ;; set to the preferred frame size that fit to an 11 inch display
 (if window-system
-    (set-frame-size (selected-frame) 223 56))
+    (set-frame-size (selected-frame) 223 55))
