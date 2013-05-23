@@ -96,6 +96,7 @@
 (my-package-install 'gtags)
 (defun my-gtags-init ()
   (autoload 'gtags-mode "gtags" "" t)
+  (setq gtags-suggested-key-mapping t)
   (add-hook 'c++-mode-hook
 	  '(lambda ()
 	     (gtags-mode t)))
