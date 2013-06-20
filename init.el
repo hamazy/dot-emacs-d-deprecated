@@ -78,6 +78,9 @@
 (add-hook 'after-init-hook
 	  'my-w3m-init)
 
+;; clojure
+(my-package-install 'nrepl)
+
 ;; scala
 (my-package-install 'scala-mode)
 (defun my-ensime-show-tooltips-nox ()
@@ -89,8 +92,8 @@
   (require 'ensime)
   (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
   (define-key ensime-mode-map "\C-c\C-v." 'my-ensime-show-tooltips-nox))
-;; (add-hook 'after-init-hook
-;; 	  'my-scala-init)
+(add-hook 'after-init-hook
+	  'my-scala-init)
 
 ;; gtags
 (my-package-install 'gtags)
@@ -106,10 +109,18 @@
 (add-hook 'after-init-hook
 	  'my-gtags-init)
 
+;; coffee script
 (my-package-install 'coffee-mode)
 (defun my-coffee-init()
   (setq coffee-tab-width 2) )
 (add-hook 'after-init-hook 'my-coffee-init)
+
+;; asciidoc
+(my-package-install 'adoc-mode)
+(add-hook 'adoc-mode-hook '(lambda () (buffer-face-mode t)))
+
+
+(setq gdb-many-windows t)
 
 ;; mew
 (autoload 'mew "mew" nil t)
@@ -152,3 +163,9 @@
 ;; set to the preferred frame size that fit to an 11 inch display
 (if window-system
     (set-frame-size (selected-frame) 223 55))
+
+(add-hook 'dired-load-hook
+          (lambda ()
+            (load "dired-x")
+            (global-set-key "\C-x\C-j" 'skk-mode)))
+
