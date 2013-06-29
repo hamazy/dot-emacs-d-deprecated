@@ -125,8 +125,16 @@
 	  (lambda ()
 	    (load-theme 'moe-dark t)))
 
-
+;; for gdb
 (setq gdb-many-windows t)
+
+;; for ruby
+;; git clone https://github.com/Mon-Ouie/ruby-dev.el.git
+;; gem install pry
+;; gem install yard
+(add-to-list 'load-path "~/.emacs.d/ruby-dev.el" )
+(autoload 'turn-on-ruby-dev "ruby-dev" nil t)
+(add-hook 'ruby-mode-hook 'turn-on-ruby-dev)
 
 ;; mew
 (autoload 'mew "mew" nil t)
