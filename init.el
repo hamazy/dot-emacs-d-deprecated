@@ -119,6 +119,12 @@
 	  (lambda ()
 	    (buffer-face-mode t)))
 
+;; moe-theme
+(my-package-install 'moe-theme)
+(add-hook 'after-init-hook
+	  (lambda ()
+	    (load-theme 'moe-dark t)))
+
 
 (setq gdb-many-windows t)
 
