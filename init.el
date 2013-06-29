@@ -169,3 +169,5 @@
             (load "dired-x")
             (global-set-key "\C-x\C-j" 'skk-mode)))
 
+;; to use with emacsclient
+(server-start)
