@@ -25,42 +25,42 @@
 ;; anything, anything-config
 (my-package-install 'anything)
 (my-package-install 'anything-config)
-(defun my-anything ()
-  (interactive)
-  (anything-other-buffer
-   '(anything-c-source-buffers
-     anything-c-source-buffer-not-found
-     anything-c-source-file-name-history
-     anything-c-source-info-pages
-     anything-c-source-man-pages
-     anything-c-source-emacs-commands
-     anything-c-source-kill-ring)
-   " *my-anything*"))
-(defun my-anything-init ()
-  (require 'anything-config)
-  (global-set-key
-   "\C-x;" 'my-anything))
 (add-hook 'after-init-hook
-	  'my-anything-init)
+	  (lambda ()
+	    (require 'anything-config)
+	    (global-set-key
+	     "\C-x;"
+	     (lambda ()
+	       (interactive)
+	       (anything-other-buffer
+		'(anything-c-source-buffers
+		  anything-c-source-buffer-not-found
+		  anything-c-source-file-name-history
+		  anything-c-source-info-pages
+		  anything-c-source-man-pages
+		  anything-c-source-emacs-commands
+		  anything-c-source-kill-ring)
+		" *my-anything*")))))
 
 ;; twittering-mode
 (my-package-install 'twittering-mode)
-(defun my-twittering-mode-init ()
-  (require 'twittering-mode)
-  (setq twittering-icon-mode nil)
-  (setq twittering-use-master-password nil))
 (add-hook 'after-init-hook
-	  'my-twittering-mode-init)
+	  (lambda ()
+	    (require 'twittering-mode)
+	    (setq twittering-icon-mode t)
+	    (setq twittering-use-master-password nil)
+	    (setq twittering-oauth-invoke-browser t)
+	    (setq twittering-status-format "%i %S @%s %@:\n%FILL[  ]{%T via %f%r%R}\n")
+	    (setq twittering-convert-fix-size 32)))
 
 ;; auto-complete
 (my-package-install 'auto-complete)
-(defun my-auto-complete-init ()
-  (require 'auto-complete)
-  (add-to-list 'ac-dictionary-directories "~/.emacs.d/dict")
-  (require 'auto-complete-config)
-  (ac-config-default))
 (add-hook 'after-init-hook
-	  'my-auto-complete-init)
+	  (lambda ()
+	    (require 'auto-complete)
+	    (add-to-list 'ac-dictionary-directories "~/.emacs.d/dict")
+	    (require 'auto-complete-config)
+	    (ac-config-default)))
 
 ;; w3m package needs w3m command to be in the exec-path.
 (defun my-add-to-path (dir)
@@ -70,13 +70,13 @@
       (let ((path-env-key "PATH"))
 	(setenv path-env-key (concat dir sep (getenv path-env-key)))))))
 (my-add-to-path "/opt/local/bin")
+(my-add-to-path "/Users/hamazy/Downloads/ruby-1.9.3-p429-dist/bin/")
 
 ;; w3m
 (my-package-install 'w3m)
-(defun my-w3m-init ()
-  (require 'w3m))
 (add-hook 'after-init-hook
-	  'my-w3m-init)
+	  (lambda ()
+	    (require 'w3m)))
 
 ;; clojure
 (my-package-install 'nrepl)
@@ -86,38 +86,38 @@
 (defun my-ensime-show-tooltips-nox ()
   (interactive)
   (ensime-tooltip-handler (point)))
-(defun my-scala-init ()
-  (require 'scala-mode-auto)
-  (add-to-list 'load-path "/opt/local/ensime_2.9.2-0.9.8.1/elisp")
-  (require 'ensime)
-  (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
-  (define-key ensime-mode-map "\C-c\C-v." 'my-ensime-show-tooltips-nox))
 (add-hook 'after-init-hook
-	  'my-scala-init)
+	  (lambda ()
+	    (require 'scala-mode-auto)
+	    (add-to-list 'load-path "/opt/local/ensime_2.9.2-0.9.8.1/elisp")
+	    (require 'ensime)
+	    (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+	    (define-key ensime-mode-map "\C-c\C-v." 'my-ensime-show-tooltips-nox)))
 
 ;; gtags
 (my-package-install 'gtags)
-(defun my-gtags-init ()
-  (autoload 'gtags-mode "gtags" "" t)
-  (setq gtags-suggested-key-mapping t)
-  (add-hook 'c++-mode-hook
-	  '(lambda ()
-	     (gtags-mode t)))
-  (add-hook 'c-mode-hook
-	  '(lambda ()
-	     (gtags-mode t))))
 (add-hook 'after-init-hook
-	  'my-gtags-init)
+	  (lambda ()
+	    (autoload 'gtags-mode "gtags" "" t)
+	    (setq gtags-suggested-key-mapping t)
+	    (add-hook 'c++-mode-hook
+		      '(lambda ()
+			 (gtags-mode t)))
+	    (add-hook 'c-mode-hook
+		      '(lambda ()
+			 (gtags-mode t)))))
 
 ;; coffee script
 (my-package-install 'coffee-mode)
-(defun my-coffee-init()
-  (setq coffee-tab-width 2) )
-(add-hook 'after-init-hook 'my-coffee-init)
+(add-hook 'after-init-hook
+	  (lambda ()
+	    (setq coffee-tab-width 2) ))
 
 ;; asciidoc
 (my-package-install 'adoc-mode)
-(add-hook 'adoc-mode-hook '(lambda () (buffer-face-mode t)))
+(add-hook 'adoc-mode-hook
+	  (lambda ()
+	    (buffer-face-mode t)))
 
 
 (setq gdb-many-windows t)
