@@ -136,6 +136,16 @@
 (autoload 'turn-on-ruby-dev "ruby-dev" nil t)
 (add-hook 'ruby-mode-hook 'turn-on-ruby-dev)
 
+(dolist (file-pattern '("\\.rake$" "Rakefile$" "Gemfile" "\\.gemspec$" "Guardfile"))
+  (add-to-list 'auto-mode-alist (cons file-pattern 'ruby-mode)))
+
+;; for rails
+(my-package-install 'rinari)
+(add-hook 'after-init-hook
+	  (lambda ()
+	    (setq rinari-major-modes
+		  (list 'ruby-mode-hook))))
+
 ;; mew
 (autoload 'mew "mew" nil t)
 (autoload 'mew-send "mew" nil t)
