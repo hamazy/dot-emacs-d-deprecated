@@ -83,16 +83,16 @@
 
 ;; scala
 (my-package-install 'scala-mode)
-(defun my-ensime-show-tooltips-nox ()
-  (interactive)
-  (ensime-tooltip-handler (point)))
 (add-hook 'after-init-hook
 	  (lambda ()
 	    (require 'scala-mode-auto)
-	    (add-to-list 'load-path "/opt/local/ensime_2.9.2-0.9.8.1/elisp")
+	    (add-to-list 'load-path "/opt/local/ensime_2.10.0-0.9.8.9/elisp/")
 	    (require 'ensime)
 	    (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
-	    (define-key ensime-mode-map "\C-c\C-v." 'my-ensime-show-tooltips-nox)))
+	    (define-key ensime-mode-map "\C-c\C-v."
+	      (lambda ()
+		(interactive)
+		(ensime-tooltip-handler (point))))))
 
 ;; gtags
 (my-package-install 'gtags)
