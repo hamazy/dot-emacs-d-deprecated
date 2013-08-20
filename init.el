@@ -82,17 +82,20 @@
 (my-package-install 'nrepl)
 
 ;; scala
-(my-package-install 'scala-mode)
-(add-hook 'after-init-hook
-	  (lambda ()
-	    (require 'scala-mode-auto)
-	    (add-to-list 'load-path "/opt/local/ensime_2.10.0-0.9.8.9/elisp/")
-	    (require 'ensime)
-	    (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
-	    (define-key ensime-mode-map "\C-c\C-v."
+(my-package-install 'scala-mode2)
+(require 'cl)
+(lexical-let* ((ensime-root "~/.ensime")
+	       (ensime-lisp-dir (concat (file-name-as-directory ensime-root) "elisp")))
+  (when (file-exists-p ensime-lisp-dir)
+    (add-hook 'after-init-hook
 	      (lambda ()
-		(interactive)
-		(ensime-tooltip-handler (point))))))
+		(add-to-list 'load-path ensime-lisp-dir)
+		(require 'ensime)
+		(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+		(define-key ensime-mode-map "\C-c\C-v."
+		  (lambda ()
+		    (interactive)
+		    (ensime-tooltip-handler (point))))))))
 
 ;; gtags
 (my-package-install 'gtags)
