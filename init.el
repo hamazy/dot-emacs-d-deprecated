@@ -20,6 +20,7 @@
 (package-list-packages t)
 (defun my-package-install (name) 
   (when (not (package-installed-p name))
+    (package-refresh-contents)
     (package-install name)))
 
 ;; anything, anything-config
