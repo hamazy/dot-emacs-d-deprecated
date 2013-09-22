@@ -92,7 +92,7 @@
 	      (lambda ()
 		(add-to-list 'load-path ensime-lisp-dir)
 		(require 'ensime)
-		(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+		(add-hook 'scala-mode-hook (lambda () (setq indent-tabs-mode nil)))
 		(define-key ensime-mode-map "\C-c\C-v."
 		  (lambda ()
 		    (interactive)
