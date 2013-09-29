@@ -97,6 +97,9 @@
 		  (lambda ()
 		    (interactive)
 		    (ensime-tooltip-handler (point))))))))
+;; install sbt with:
+;; curl https://raw.github.com/hamazy/misc-setups/master/install-sbt.sh | sh
+(my-add-to-path "~/.sbt-0.12.1/bin")
 
 ;; gtags
 (my-package-install 'gtags)
@@ -162,6 +165,13 @@
 (autoload 'mew "mew" nil t)
 (autoload 'mew-send "mew" nil t)
 (setq mew-ssl-verify-level 0)
+
+;; for go language
+(my-package-install 'go-mode)
+
+;; install aspell with:
+;; $ sudo port install aspell aspell-dict-en
+(setq ispell-program-name "aspell")
 
 ;; font settings
 (defun font-exists-p (font)
