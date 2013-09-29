@@ -150,6 +150,14 @@
 	    (setq rinari-major-modes
 		  (list 'ruby-mode-hook))))
 
+;; for irfc
+(my-package-install 'irfc)
+(add-hook 'after-init-hook
+	  (lambda ()
+	    (require 'irfc)
+	    (setq irfc-directory "~/.emacs.d/irfc")
+	    (setq irfc-assoc-mode t)))
+
 ;; mew
 (autoload 'mew "mew" nil t)
 (autoload 'mew-send "mew" nil t)
