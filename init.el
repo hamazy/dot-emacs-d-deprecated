@@ -5,6 +5,7 @@
   (scroll-bar-mode -1))
 (column-number-mode t)
 (display-time-mode t)
+(setq display-time-day-and-date t)
 (setq ring-bell-function 'ignore)
 (setq mac-command-modifier 'meta)
 
@@ -81,6 +82,7 @@
 
 ;; clojure
 (my-package-install 'nrepl)
+(my-add-to-path "~/.lein/bin")
 
 ;; scala
 (my-package-install 'scala-mode2)
