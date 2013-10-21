@@ -170,6 +170,41 @@
 
 ;; for go language
 (my-package-install 'go-mode)
+(add-hook 'after-init-hook
+	  (lambda ()
+	    (require 'go-mode-load)
+	    (add-hook 'before-save-hook 'gofmt-before-save)
+	    (add-hook 'go-mode-hook (lambda ()
+				      (local-set-key (kbd "C-c C-r") 'go-remove-unused-imports)
+				      (local-set-key (kbd "C-c i") 'go-goto-imports)))
+	    ))
+(when (file-exists-p "~/.gocode")
+  (my-add-to-path "~/.gocode/bin")
+  (setenv "GOPATH" "~/.gocode"))
+(when (file-exists-p "~/.gocode/src/github.com/nsf/gocode/emacs-company/company-go.el")
+  (my-package-install 'company)
+  (add-to-list 'load-path "~/.gocode/src/github.com/nsf/gocode/emacs-company/")
+  (add-hook 'after-init-hook
+	    (lambda ()
+	      (require 'company)
+	      (require 'company-go)
+	      (setq company-tooltip-limit 20)
+	      (setq company-minimum-prefix-length 0)
+	      (setq company-idle-delay .3)
+	      (setq company-echo-delay 0)
+	      (setq company-begin-commands '(self-insert-command))
+	      (add-hook 'go-mode-hook
+			(lambda ()
+			  (set (make-local-variable 'company-backends) '(company-go))
+			  (company-mode))))))
+(my-package-install 'flymake)
+(my-package-install 'flycheck)
+(when (file-exists-p "~/.gocode/src/github.com/dougm/goflymake/go-flymake.el")
+  (add-to-list 'load-path "~/.gocode/src/github.com/dougm/goflymake/")
+  (add-hook 'after-init-hook
+	    (lambda ()
+	      (require 'go-flymake)
+	      (require 'go-flycheck))))
 
 ;; install aspell with:
 ;; $ sudo port install aspell aspell-dict-en
