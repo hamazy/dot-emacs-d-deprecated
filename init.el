@@ -53,6 +53,8 @@
 	    (setq twittering-use-master-password nil)
 	    (setq twittering-oauth-invoke-browser t)
 	    (setq twittering-status-format "%i %S @%s %@:\n%FILL[  ]{%T via %f%r%R}\n")
+	    ;; this needs convert available, which can be installed
+	    ;; with `port install ImageMagick`.
 	    (setq twittering-convert-fix-size 32)))
 
 ;; auto-complete
@@ -72,7 +74,6 @@
       (let ((path-env-key "PATH"))
 	(setenv path-env-key (concat dir sep (getenv path-env-key)))))))
 (my-add-to-path "/opt/local/bin")
-(my-add-to-path "/Users/hamazy/Downloads/ruby-1.9.3-p429-dist/bin/")
 
 ;; w3m
 (my-package-install 'w3m)
@@ -209,6 +210,12 @@
 ;; install aspell with:
 ;; $ sudo port install aspell aspell-dict-en
 (setq ispell-program-name "aspell")
+
+(my-package-install 'yaml-mode)
+(add-hook 'after-init-hook
+	  (lambda ()
+	    (require 'yaml-mode)
+	    (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))))
 
 ;; font settings
 (defun font-exists-p (font)
