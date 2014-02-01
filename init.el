@@ -10,6 +10,7 @@
 (setq mac-command-modifier 'meta)
 
 (global-set-key (kbd "C-h") 'delete-backward-char)
+(global-set-key (kbd "C-?") 'help)
 
 (global-hl-line-mode t)
 
