@@ -24,25 +24,37 @@
     (package-refresh-contents)
     (package-install name)))
 
-;; anything, anything-config
-(my-package-install 'anything)
-(my-package-install 'anything-config)
+;; helm
+(my-package-install 'helm)
+(my-package-install 'helm-ls-git)
 (add-hook 'after-init-hook
 	  (lambda ()
-	    (require 'anything-config)
+	    (require 'helm-config)
+	    (require 'helm-man)
+	    (require 'helm-ring)
+	    (require 'helm-buffers)
+	    (require 'helm-files)
+	    (require 'helm-info)
 	    (global-set-key
 	     (kbd "C-x ;")
 	     (lambda ()
 	       (interactive)
-	       (anything-other-buffer
-		'(anything-c-source-buffers
-		  anything-c-source-buffer-not-found
-		  anything-c-source-file-name-history
-		  anything-c-source-info-pages
-		  anything-c-source-man-pages
-		  anything-c-source-emacs-commands
-		  anything-c-source-kill-ring)
-		" *my-anything*")))))
+	       (helm-other-buffer
+		'(helm-source-buffers-list
+		  helm-source-recentf
+		  helm-source-buffer-not-found
+		  helm-source-file-name-history
+		  helm-source-man-pages
+		  helm-source-info-pages
+		  helm-source-kill-ring)
+		"*my-helm*")))
+	    (global-set-key (kbd "M-x") 'helm-M-x)
+	    (global-set-key (kbd "C-x C-f") 'helm-find-files)
+	    (add-hook 'helm-after-initialize-hook
+		      (lambda ()
+			(define-key helm-map (kbd "C-h") 'delete-backward-char)
+			(define-key helm-find-files-map (kbd "C-h") 'delete-backward-char)))
+	    (setq helm-split-window-default-side 'right)))
 
 ;; twittering-mode
 (my-package-install 'twittering-mode)
