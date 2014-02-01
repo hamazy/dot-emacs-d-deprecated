@@ -97,7 +97,17 @@
 	      (lambda ()
 		(add-to-list 'load-path ensime-lisp-dir)
 		(require 'ensime)
-		(add-hook 'scala-mode-hook (lambda () (setq indent-tabs-mode nil)))
+		(add-hook 'ensime-scala-mode-hook
+			  (lambda ()
+			    (add-to-list 'ac-sources 'ac-source-dictionary)
+			    (add-to-list 'ac-sources 'ac-source-yasnippet)
+			    (add-to-list 'ac-sources 'ac-source-words-in-buffer)
+			    (add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers)
+			    (setq ac-source (reverse ac-sources))))
+		(add-hook 'scala-mode-hook
+			  (lambda ()
+			    (setq indent-tabs-mode nil)
+			    (ensime-scala-mode-hook)))
 		(define-key ensime-mode-map (kbd "C-c C-v .")
 		  (lambda ()
 		    (interactive)
