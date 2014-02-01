@@ -53,9 +53,10 @@
 	    (setq twittering-use-master-password nil)
 	    (setq twittering-oauth-invoke-browser t)
 	    (setq twittering-status-format "%i %S @%s %@:\n%FILL[  ]{%T via %f%r%R}\n")
-	    ;; this needs convert available, which can be installed
-	    ;; with `port install ImageMagick`.
-	    (setq twittering-convert-fix-size 32)))
+	    (when (executable-find "convert")
+	      ;; this needs convert available, which can be installed
+	      ;; with `brew install imagemagick`.
+	      (setq twittering-convert-fix-size 32))))
 
 ;; auto-complete
 (my-package-install 'auto-complete)
@@ -77,9 +78,10 @@
 
 ;; w3m
 (my-package-install 'w3m)
-(add-hook 'after-init-hook
-	  (lambda ()
-	    (require 'w3m)))
+(when (executable-find "w3m")
+  (add-hook 'after-init-hook
+	    (lambda ()
+	      (require 'w3m))))
 
 ;; clojure
 (my-package-install 'nrepl)
@@ -209,7 +211,8 @@
 
 ;; install aspell with:
 ;; $ sudo port install aspell aspell-dict-en
-(setq ispell-program-name "aspell")
+(when (executable-find "aspell")
+  (setq ispell-program-name "aspell"))
 
 (my-package-install 'yaml-mode)
 (add-hook 'after-init-hook
