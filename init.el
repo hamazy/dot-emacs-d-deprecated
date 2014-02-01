@@ -9,7 +9,7 @@
 (setq ring-bell-function 'ignore)
 (setq mac-command-modifier 'meta)
 
-(global-set-key "\C-h" 'delete-backward-char)
+(global-set-key (kbd "C-h") 'delete-backward-char)
 
 (global-hl-line-mode t)
 
@@ -31,7 +31,7 @@
 	  (lambda ()
 	    (require 'anything-config)
 	    (global-set-key
-	     "\C-x;"
+	     (kbd "C-x ;")
 	     (lambda ()
 	       (interactive)
 	       (anything-other-buffer
@@ -96,7 +96,7 @@
 		(add-to-list 'load-path ensime-lisp-dir)
 		(require 'ensime)
 		(add-hook 'scala-mode-hook (lambda () (setq indent-tabs-mode nil)))
-		(define-key ensime-mode-map "\C-c\C-v."
+		(define-key ensime-mode-map (kbd "C-c C-v .")
 		  (lambda ()
 		    (interactive)
 		    (ensime-tooltip-handler (point))))))))
@@ -257,7 +257,7 @@
 (add-hook 'dired-load-hook
           (lambda ()
             (load "dired-x")
-            (global-set-key "\C-x\C-j" 'skk-mode)))
+            (global-set-key (kbd "C-x C-j") 'skk-mode)))
 
 ;; to use with emacsclient
 (server-start)
