@@ -125,9 +125,15 @@
 		  (lambda ()
 		    (interactive)
 		    (ensime-tooltip-handler (point))))))))
-;; install sbt with:
-;; curl https://raw.github.com/hamazy/misc-setups/master/install-sbt.sh | sh
-(my-add-to-path "~/.sbt-0.12.1/bin")
+
+;; sbt
+(my-add-to-path "~/.sbt-0.13.1/bin")
+(when (not (executable-find "sbt"))
+  (let ((sh (executable-find "sh"))
+	(curl (executable-find "curl")))
+    (when (and curl sh)
+      (shell-command
+       (concat curl " https://raw.github.com/hamazy/misc-setups/master/install-sbt.sh | " sh)))))
 
 ;; gtags
 (my-package-install 'gtags)
