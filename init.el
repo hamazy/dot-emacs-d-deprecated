@@ -71,15 +71,6 @@
 	      ;; with `brew install imagemagick`.
 	      (setq twittering-convert-fix-size 32))))
 
-;; auto-complete
-(my-package-install 'auto-complete)
-(add-hook 'after-init-hook
-	  (lambda ()
-	    (require 'auto-complete)
-	    (add-to-list 'ac-dictionary-directories "~/.emacs.d/dict")
-	    (require 'auto-complete-config)
-	    (ac-config-default)))
-
 ;; w3m package needs w3m command to be in the exec-path.
 (defun my-add-to-path (dir)
   (let ((sep (if (eq system-type 'windows-nt) ";" ":")))
@@ -131,6 +122,15 @@
     (when (and curl sh)
       (shell-command
        (concat curl " https://raw.github.com/hamazy/misc-setups/master/install-sbt.sh | " sh)))))
+
+;; auto-complete
+(my-package-install 'auto-complete)
+(add-hook 'after-init-hook
+	  (lambda ()
+	    (require 'auto-complete)
+	    (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+	    (require 'auto-complete-config)
+	    (ac-config-default)))
 
 ;; gtags
 (my-package-install 'gtags)
