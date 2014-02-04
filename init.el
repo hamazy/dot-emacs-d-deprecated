@@ -113,6 +113,9 @@
 		  (lambda ()
 		    (interactive)
 		    (ensime-tooltip-handler (point))))))))
+(let ((brew (executable-find "brew")))
+  (when (and brew (not (executable-find "scala")))
+    (shell-command (concat brew " install scala"))))
 
 ;; sbt
 (my-add-to-path "~/.sbt-0.13.1/bin")
