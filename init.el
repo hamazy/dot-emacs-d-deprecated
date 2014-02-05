@@ -147,6 +147,9 @@
 	    (add-hook 'c-mode-hook
 		      '(lambda ()
 			 (gtags-mode t)))))
+(let ((brew (executable-find "brew")))
+  (when (and brew (not (executable-find "gtags")))
+        (shell-command (concat brew " install global"))))
 
 ;; coffee script
 (my-package-install 'coffee-mode)
