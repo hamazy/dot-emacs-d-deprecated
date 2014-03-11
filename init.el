@@ -29,6 +29,12 @@
     (package-refresh-contents)
     (package-install name)))
 
+(add-hook 'after-init-hook
+	  (lambda ()
+	    (add-hook 'emacs-lisp-mode-hook
+		      (lambda ()
+			(prettify-symbols-mode)))))
+
 ;; helm
 (my-package-install 'helm)
 (my-package-install 'helm-ls-git)
@@ -94,6 +100,12 @@
 ;; clojure
 (my-package-install 'nrepl)
 (my-add-to-path "~/.lein/bin")
+(add-hook 'after-init-hook
+	  (lambda ()
+	    (add-hook 'clojure-mode-hook
+		      (lambda ()
+			(add-to-list 'prettify-symbols-alist '("->" . 8594))
+			(prettify-symbols-mode)))))
 
 ;; scala
 (my-package-install 'scala-mode2)
@@ -171,6 +183,11 @@
 (my-package-install 'coffee-mode)
 (add-hook 'after-init-hook
 	  (lambda ()
+	    (add-hook 'coffee-mode-hook
+		      (lambda ()
+			(add-to-list 'prettify-symbols-alist '("->" . 8594))
+			(add-to-list 'prettify-symbols-alist '("=>" . 8658))
+			(prettify-symbols-mode)))
 	    (setq coffee-tab-width 2) ))
 
 ;; asciidoc
