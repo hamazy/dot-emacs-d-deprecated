@@ -15,6 +15,7 @@
 (global-set-key (kbd "C-?") 'help)
 
 (global-hl-line-mode t)
+(defalias 'list-buffers 'ibuffer)
 
 ;; package
 (require 'package)
