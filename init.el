@@ -8,6 +8,8 @@
 (setq display-time-day-and-date t)
 (setq ring-bell-function 'ignore)
 (setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'super)
+(setq mac-function-modifier 'hyper)
 
 (global-set-key (kbd "C-h") 'delete-backward-char)
 (global-set-key (kbd "C-?") 'help)
