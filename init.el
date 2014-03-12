@@ -190,6 +190,13 @@
 			(prettify-symbols-mode)))
 	    (setq coffee-tab-width 2) ))
 
+;; javascript
+(add-hook 'after-init-hook
+	  (lambda ()
+	    (add-hook 'js-mode-hook
+		      (setq js-indent-level 2)
+		      (setq indent-tabs-mode nil))))
+
 ;; asciidoc
 (my-package-install 'adoc-mode)
 (add-hook 'adoc-mode-hook
