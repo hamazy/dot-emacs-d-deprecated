@@ -140,7 +140,11 @@
 		(add-to-list 'ensime-doc-lookup-map
 			     '("^scala.slick\\." . (lambda (type &optional member)
 				      (ensime-make-scala-doc-url-helper
-				       "http://slick.typesafe.com/doc/2.0.0/api/" type member))))))))
+				       "http://slick.typesafe.com/doc/2.0.0/api/" type member))))
+		(add-to-list 'ensime-doc-lookup-map
+			     '("^x?sbti?\\." . (lambda (type &optional member)
+				      (ensime-make-scala-doc-url-helper
+				       "http://www.scala-sbt.org/release/api/" type member))))))))
 (let ((brew (executable-find "brew")))
   (when (and brew (not (executable-find "scala")))
     (shell-command (concat brew " install scala"))))
