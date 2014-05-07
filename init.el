@@ -76,6 +76,7 @@
 	    (setq twittering-use-master-password nil)
 	    (setq twittering-oauth-invoke-browser t)
 	    (setq twittering-status-format "%i %S @%s %@:\n%FILL[  ]{%T via %f%r%R}\n")
+	    (setq twittering-retweet-format '(nil _ " RT @%s: %t"))
 	    (when (executable-find "convert")
 	      ;; this needs convert available, which can be installed
 	      ;; with `brew install imagemagick`.
