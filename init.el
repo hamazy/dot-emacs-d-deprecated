@@ -286,6 +286,8 @@
 	      (require 'go-flymake)
 	      (require 'go-flycheck))))
 
+(my-package-install 'markdown-mode)
+
 ;; install aspell with:
 ;; $ sudo port install aspell aspell-dict-en
 (when (executable-find "aspell")
