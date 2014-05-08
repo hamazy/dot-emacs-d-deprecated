@@ -164,6 +164,9 @@
       (shell-command
        (concat curl " https://raw.github.com/hamazy/misc-setups/master/install-sbt.sh | " sh)))))
 
+;; haskell
+(my-package-install 'haskell-mode)
+
 ;; auto-complete
 (my-package-install 'auto-complete)
 (add-hook 'after-init-hook
