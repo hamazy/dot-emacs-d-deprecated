@@ -170,6 +170,14 @@
 
 ;; haskell
 (my-package-install 'haskell-mode)
+(add-hook 'after-init-hook
+	  (lambda ()
+	    (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+	    (add-to-list 'prettify-symbols-alist '("<-" . 8592))
+	    (add-to-list 'prettify-symbols-alist '("->" . 8594))
+	    (add-to-list 'prettify-symbols-alist '("=>" . 8658))
+	    (add-to-list 'prettify-symbols-alist '("\\" . 955))
+	    (prettify-symbols-mode)))
 
 ;; auto-complete
 (my-package-install 'auto-complete)
