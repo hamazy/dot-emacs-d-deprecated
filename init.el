@@ -150,7 +150,11 @@
 		(add-to-list 'ensime-doc-lookup-map
 			     '("^x?sbti?\\." . (lambda (type &optional member)
 				      (ensime-make-scala-doc-url-helper
-				       "http://www.scala-sbt.org/release/api/" type member))))))))
+				       "http://www.scala-sbt.org/release/api/" type member))))
+		(add-to-list 'ensime-doc-lookup-map
+			     '("^org.scalatest" . (lambda (type &optional member)
+				      (ensime-make-scala-doc-url-helper
+				       "http://doc.scalatest.org/2.1.5/" type member))))))))
 (let ((brew (executable-find "brew")))
   (when (and brew (not (executable-find "scala")))
     (shell-command (concat brew " install scala"))))
