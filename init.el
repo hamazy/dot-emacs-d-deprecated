@@ -33,7 +33,8 @@
 	  (lambda ()
 	    (add-hook 'emacs-lisp-mode-hook
 		      (lambda ()
-			(prettify-symbols-mode)))))
+			(when (fboundp 'prettify-symbols-mode)
+			    (prettify-symbols-mode))))))
 
 ;; helm
 (my-package-install 'helm)
@@ -105,8 +106,9 @@
 	  (lambda ()
 	    (add-hook 'clojure-mode-hook
 		      (lambda ()
-			(add-to-list 'prettify-symbols-alist '("->" . 8594))
-			(prettify-symbols-mode)))))
+			(when (fboundp 'prettify-symbols-mode)
+			    (add-to-list 'prettify-symbols-alist '("->" . 8594))
+			  (prettify-symbols-mode))))))
 
 ;; scala
 (my-package-install 'scala-mode2)
@@ -173,11 +175,12 @@
 (add-hook 'after-init-hook
 	  (lambda ()
 	    (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
-	    (add-to-list 'prettify-symbols-alist '("<-" . 8592))
-	    (add-to-list 'prettify-symbols-alist '("->" . 8594))
-	    (add-to-list 'prettify-symbols-alist '("=>" . 8658))
-	    (add-to-list 'prettify-symbols-alist '("\\" . 955))
-	    (prettify-symbols-mode)))
+	    (when (fboundp 'prettify-symbols-mode)
+		(add-to-list 'prettify-symbols-alist '("<-" . 8592))
+	      (add-to-list 'prettify-symbols-alist '("->" . 8594))
+	      (add-to-list 'prettify-symbols-alist '("=>" . 8658))
+	      (add-to-list 'prettify-symbols-alist '("\\" . 955))
+	      (prettify-symbols-mode))))
 
 ;; auto-complete
 (my-package-install 'auto-complete)
@@ -210,9 +213,10 @@
 	  (lambda ()
 	    (add-hook 'coffee-mode-hook
 		      (lambda ()
-			(add-to-list 'prettify-symbols-alist '("->" . 8594))
-			(add-to-list 'prettify-symbols-alist '("=>" . 8658))
-			(prettify-symbols-mode)))
+			(when (fboundp 'prettify-symbols-mode)
+			    (add-to-list 'prettify-symbols-alist '("->" . 8594))
+			  (add-to-list 'prettify-symbols-alist '("=>" . 8658))
+			  (prettify-symbols-mode))))
 	    (setq coffee-tab-width 2) ))
 
 ;; javascript
