@@ -268,6 +268,7 @@
 (my-package-install 'moe-theme)
 (add-hook 'after-init-hook
 	  (lambda ()
+	    (require 'moe-theme)
 	    (load-theme 'moe-dark t)))
 
 ;; for gdb
