@@ -162,13 +162,13 @@
     (shell-command (concat brew " install scala"))))
 
 ;; sbt
-(my-add-to-path "~/.sbt-0.13.1/bin")
+(my-add-to-path "~/.sbt-0.13.6/bin")
 (when (not (executable-find "sbt"))
   (let ((sh (executable-find "sh"))
 	(curl (executable-find "curl")))
     (when (and curl sh)
       (shell-command
-       (concat curl " https://raw.github.com/hamazy/misc-setups/master/install-sbt.sh | " sh)))))
+       (concat curl " https://raw.githubusercontent.com/hamazy/misc-setups/master/install-sbt.sh | SBT_VERSION=0.13.6 " sh)))))
 
 ;; haskell
 (my-package-install 'haskell-mode)
