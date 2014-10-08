@@ -309,7 +309,7 @@
 (my-package-install 'go-mode)
 (add-hook 'after-init-hook
 	  (lambda ()
-	    (require 'go-mode-load)
+	    (require 'go-mode)
 	    (add-hook 'before-save-hook 'gofmt-before-save)
 	    (add-hook 'go-mode-hook (lambda ()
 				      (local-set-key (kbd "C-c C-r") 'go-remove-unused-imports)
