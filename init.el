@@ -112,51 +112,47 @@
 
 ;; scala
 (my-package-install 'scala-mode2)
-(require 'cl)
-(lexical-let* ((ensime-root "~/.ensime")
-	       (ensime-lisp-dir (concat (file-name-as-directory ensime-root) "elisp")))
-  (when (file-exists-p ensime-lisp-dir)
-    (add-hook 'after-init-hook
+(my-package-install 'ensime)
+(add-hook 'after-init-hook
+	  (lambda ()
+	    (require 'ensime)
+	    (add-hook 'scala-mode-hook
+		      (lambda ()
+			(ensime-scala-mode-hook)
+			(setq indent-tabs-mode nil)
+			(add-to-list 'ac-sources 'ac-source-dictionary t)
+			(add-to-list 'ac-sources 'ac-source-abbrev t)
+			(add-to-list 'ac-sources 'ac-source-yasnippet t)
+			(add-to-list 'ac-sources 'ac-source-words-in-buffer t)
+			(add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers t)
+			(define-abbrev-table 'scala-mode-abbrev-table
+			  '(("rarr" "→") ("rdarr" "⇒") ("larr" "←")))
+			(abbrev-mode t)))
+	    (add-hook 'ensime-source-buffer-saved-hook 'ensime-format-source)
+	    (define-key ensime-mode-map (kbd "C-c C-v .")
 	      (lambda ()
-		(add-to-list 'load-path ensime-lisp-dir)
-		(require 'ensime)
-		(add-hook 'scala-mode-hook
-			  (lambda ()
-			    (ensime-scala-mode-hook)
-			    (setq indent-tabs-mode nil)
-			    (add-to-list 'ac-sources 'ac-source-dictionary t)
-			    (add-to-list 'ac-sources 'ac-source-abbrev t)
-			    (add-to-list 'ac-sources 'ac-source-yasnippet t)
-			    (add-to-list 'ac-sources 'ac-source-words-in-buffer t)
-			    (add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers t)
-			    (define-abbrev-table 'scala-mode-abbrev-table
-			      '(("rarr" "→") ("rdarr" "⇒") ("larr" "←")))
-			    (abbrev-mode t)))
-		(add-hook 'ensime-source-buffer-saved-hook 'ensime-format-source)
-		(define-key ensime-mode-map (kbd "C-c C-v .")
-		  (lambda ()
-		    (interactive)
-		    (ensime-tooltip-handler (point))))
-		(add-to-list 'ensime-doc-lookup-map
-			     '("^spray\\." . (lambda (type &optional member)
-				      (ensime-make-scala-doc-url-helper
-				       "http://spray.io/documentation/1.1-SNAPSHOT/api/" type member))))
-		(add-to-list 'ensime-doc-lookup-map
-			     '("^akka\\." . (lambda (type &optional member)
-				      (ensime-make-scala-doc-url-helper
-				       "http://doc.akka.io/api/akka/2.2.3/" type member))))
-		(add-to-list 'ensime-doc-lookup-map
-			     '("^scala.slick\\." . (lambda (type &optional member)
-				      (ensime-make-scala-doc-url-helper
-				       "http://slick.typesafe.com/doc/2.0.0/api/" type member))))
-		(add-to-list 'ensime-doc-lookup-map
-			     '("^x?sbti?\\." . (lambda (type &optional member)
-				      (ensime-make-scala-doc-url-helper
-				       "http://www.scala-sbt.org/release/api/" type member))))
-		(add-to-list 'ensime-doc-lookup-map
-			     '("^org.scalatest" . (lambda (type &optional member)
-				      (ensime-make-scala-doc-url-helper
-				       "http://doc.scalatest.org/2.1.5/" type member))))))))
+		(interactive)
+		(ensime-tooltip-handler (point))))
+	    (add-to-list 'ensime-doc-lookup-map
+			 '("^spray\\." . (lambda (type &optional member)
+					   (ensime-make-scala-doc-url-helper
+					    "http://spray.io/documentation/1.1-SNAPSHOT/api/" type member))))
+	    (add-to-list 'ensime-doc-lookup-map
+			 '("^akka\\." . (lambda (type &optional member)
+					  (ensime-make-scala-doc-url-helper
+					   "http://doc.akka.io/api/akka/2.2.3/" type member))))
+	    (add-to-list 'ensime-doc-lookup-map
+			 '("^scala.slick\\." . (lambda (type &optional member)
+						 (ensime-make-scala-doc-url-helper
+						  "http://slick.typesafe.com/doc/2.0.0/api/" type member))))
+	    (add-to-list 'ensime-doc-lookup-map
+			 '("^x?sbti?\\." . (lambda (type &optional member)
+					     (ensime-make-scala-doc-url-helper
+					      "http://www.scala-sbt.org/release/api/" type member))))
+	    (add-to-list 'ensime-doc-lookup-map
+			 '("^org.scalatest" . (lambda (type &optional member)
+						(ensime-make-scala-doc-url-helper
+						 "http://doc.scalatest.org/2.1.5/" type member))))))
 (let ((brew (executable-find "brew")))
   (when (and brew (not (executable-find "scala")))
     (shell-command (concat brew " install scala"))))
