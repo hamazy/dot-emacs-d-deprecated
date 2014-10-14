@@ -10,6 +10,7 @@
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
 (setq mac-function-modifier 'hyper)
+(setq-default indent-tabs-mode nil)
 
 (global-set-key (kbd "C-h") 'delete-backward-char)
 (global-set-key (kbd "C-?") 'help)
@@ -73,7 +74,7 @@
 (add-hook 'after-init-hook
 	  (lambda ()
 	    (require 'twittering-mode)
-	    (setq twittering-icon-mode t)
+	    (setq twittering-icon-mode nil)
 	    (setq twittering-use-master-password nil)
 	    (setq twittering-oauth-invoke-browser t)
 	    (setq twittering-status-format "%i %S @%s %@:\n%FILL[  ]{%T via %f%r%R}\n")
@@ -90,7 +91,7 @@
       (setq exec-path (append (list dir) exec-path))
       (let ((path-env-key "PATH"))
 	(setenv path-env-key (concat dir sep (getenv path-env-key)))))))
-(my-add-to-path "/usr/local/bin")
+(my-add-to-path "c:/Program Files/Git/bin")
 
 ;; w3m
 (my-package-install 'w3m)
@@ -118,8 +119,7 @@
 	    (require 'ensime)
 	    (add-hook 'scala-mode-hook
 		      (lambda ()
-			(ensime-scala-mode-hook)
-			(setq indent-tabs-mode nil)
+			(ensime-scala-mode-hook)	
 			(add-to-list 'ac-sources 'ac-source-dictionary t)
 			(add-to-list 'ac-sources 'ac-source-abbrev t)
 			(add-to-list 'ac-sources 'ac-source-yasnippet t)
@@ -166,13 +166,14 @@
       (shell-command
        (concat curl " https://raw.githubusercontent.com/hamazy/misc-setups/master/install-sbt.sh | SBT_VERSION=0.13.6 " sh)))))
 
+(add-to-list 'auto-mode-alist '("\\.cls$" . java-mode))
+
 ;; haskell
 (my-package-install 'haskell-mode)
 (add-hook 'after-init-hook
 	  (lambda ()
 	    (add-hook 'haskell-mode-hook
 		      (lambda ()
-			(setq indent-tabs-mode nil)
 			(turn-on-haskell-indentation)
 			(turn-on-haskell-decl-scan)
 			(when (fboundp 'prettify-symbols-mode)
@@ -251,8 +252,7 @@
 (add-hook 'after-init-hook
 	  (lambda ()
 	    (add-hook 'js-mode-hook
-		      (setq js-indent-level 2)
-		      (setq indent-tabs-mode nil))))
+		      (setq js-indent-level 2))))
 
 ;; asciidoc
 (my-package-install 'adoc-mode)
