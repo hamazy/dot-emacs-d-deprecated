@@ -37,6 +37,8 @@
 			(when (fboundp 'prettify-symbols-mode)
 			    (prettify-symbols-mode))))))
 
+(my-package-install 'magit)
+
 ;; helm
 (my-package-install 'helm)
 (my-package-install 'helm-ls-git)
