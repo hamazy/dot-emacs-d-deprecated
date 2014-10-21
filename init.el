@@ -103,7 +103,7 @@
 	      (require 'w3m))))
 
 ;; clojure
-(my-package-install 'nrepl)
+(my-package-install 'cider)
 (my-add-to-path "~/.lein/bin")
 (add-hook 'after-init-hook
 	  (lambda ()
@@ -111,7 +111,11 @@
 		      (lambda ()
 			(when (fboundp 'prettify-symbols-mode)
 			    (add-to-list 'prettify-symbols-alist '("->" . 8594))
-			  (prettify-symbols-mode))))))
+			  (prettify-symbols-mode))))
+            (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+            (setq nrepl-log-messages t)
+            (setq nrepl-hide-special-buffers t)
+))
 
 ;; scala
 (my-package-install 'scala-mode2)
