@@ -97,6 +97,7 @@
       (let ((path-env-key "PATH"))
 	(setenv path-env-key (concat dir sep (getenv path-env-key)))))))
 (my-add-to-path "c:/Program Files/Git/bin")
+(my-add-to-path "/usr/local/bin")
 
 ;; w3m
 (my-package-install 'w3m)
