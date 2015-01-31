@@ -365,6 +365,15 @@
 	    (require 'yaml-mode)
 	    (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))))
 
+;; org-mode
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+(add-hook 'after-init-hook
+          (lambda () (setq org-todo-keywords
+                      '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))))
+
 ;; font settings
 (defun font-exists-p (font)
   (member font (font-family-list)))
