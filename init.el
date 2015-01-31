@@ -138,7 +138,6 @@
 			(define-abbrev-table 'scala-mode-abbrev-table
 			  '(("rarr" "→") ("rdarr" "⇒") ("larr" "←")))
 			(abbrev-mode t)))
-	    (add-hook 'ensime-source-buffer-saved-hook 'ensime-format-source)
 	    (define-key ensime-mode-map (kbd "C-c C-v .")
 	      (lambda ()
 		(interactive)
