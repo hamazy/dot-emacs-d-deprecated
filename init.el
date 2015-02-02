@@ -23,7 +23,8 @@
 (require 'package)
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                            ("marmalade" . "http://marmalade-repo.org/packages/")
-                           ("melpa" . "http://melpa.milkbox.net/packages/")))
+                           ("melpa" . "http://melpa.milkbox.net/packages/")
+                           ("org" . "http://orgmode.org/elpa/")))
 (package-list-packages t)
 (defun my-package-install (name) 
   (when (not (package-installed-p name))
@@ -371,7 +372,12 @@
 (global-set-key "\C-cb" 'org-iswitchb)
 (add-hook 'after-init-hook
           (lambda () (setq org-todo-keywords
-                      '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))))
+                      '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
+            (setq org-log-done 'time)))
+(my-package-install 'org-plus-contrib)
+(add-hook 'after-init-hook (lambda ()
+                             (require 'ox-taskjuggler)
+                             (add-to-list 'org-export-backends 'taskjuggler)))
 
 ;; font settings
 (defun font-exists-p (font)
