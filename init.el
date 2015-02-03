@@ -168,13 +168,13 @@
     (shell-command (concat brew " install scala"))))
 
 ;; sbt
-(my-add-to-path "~/.sbt-0.13.6/bin")
+(my-add-to-path "~/.sbt-0.13.7/bin")
 (when (not (executable-find "sbt"))
   (let ((sh (executable-find "sh"))
 	(curl (executable-find "curl")))
     (when (and curl sh)
       (shell-command
-       (concat curl " https://raw.githubusercontent.com/hamazy/misc-setups/master/install-sbt.sh | SBT_VERSION=0.13.6 " sh)))))
+       (concat curl " https://raw.githubusercontent.com/hamazy/misc-setups/master/install-sbt.sh | SBT_VERSION=0.13.7 " sh)))))
 
 (add-to-list 'auto-mode-alist '("\\.cls$" . java-mode))
 
