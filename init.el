@@ -142,27 +142,7 @@
 	    (define-key ensime-mode-map (kbd "C-c C-v .")
 	      (lambda ()
 		(interactive)
-		(ensime-tooltip-handler (point))))
-	    (add-to-list 'ensime-doc-lookup-map
-			 '("^spray\\." . (lambda (type &optional member)
-					   (ensime-make-scala-doc-url-helper
-					    "http://spray.io/documentation/1.1-SNAPSHOT/api/" type member))))
-	    (add-to-list 'ensime-doc-lookup-map
-			 '("^akka\\." . (lambda (type &optional member)
-					  (ensime-make-scala-doc-url-helper
-					   "http://doc.akka.io/api/akka/2.2.3/" type member))))
-	    (add-to-list 'ensime-doc-lookup-map
-			 '("^scala.slick\\." . (lambda (type &optional member)
-						 (ensime-make-scala-doc-url-helper
-						  "http://slick.typesafe.com/doc/2.0.0/api/" type member))))
-	    (add-to-list 'ensime-doc-lookup-map
-			 '("^x?sbti?\\." . (lambda (type &optional member)
-					     (ensime-make-scala-doc-url-helper
-					      "http://www.scala-sbt.org/release/api/" type member))))
-	    (add-to-list 'ensime-doc-lookup-map
-			 '("^org.scalatest" . (lambda (type &optional member)
-						(ensime-make-scala-doc-url-helper
-						 "http://doc.scalatest.org/2.1.5/" type member))))))
+		(ensime-tooltip-handler (point))))))
 (let ((brew (executable-find "brew")))
   (when (and brew (not (executable-find "scala")))
     (shell-command (concat brew " install scala"))))
